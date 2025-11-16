@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RepositoryLayer.Contexts;
 
-namespace RepositoryLayer.Repositories
+namespace RepositoryLayer.Extentions
 {
     public static class RepositoryLayerExtentions
     {
