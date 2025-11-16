@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="CoreLayer/CoreLayer.csproj" />
+  <Project Path="EntityLayer/EntityLayer.csproj" />
+  <Project Path="RepositoryLayer/RepositoryLayer.csproj" />
+  <Project Path="ServiceLayer/ServiceLayer.csproj" />
+  <Project Path="YouTube.Plumbing/YouTube.Plumbing.csproj" />
+</Solution>
