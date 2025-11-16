@@ -1,3 +1,5 @@
+using RepositoryLayer.Repositories;
+
 namespace YouTube.Plumbing
 {
     public class Program
@@ -8,6 +10,7 @@ namespace YouTube.Plumbing
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.LoadRepositoryLayerExtenstions(builder.Configuration);
 
             var app = builder.Build();
 
