@@ -1,8 +1,6 @@
-﻿using CoreLayer.BaseEntities;
-
-namespace EntityLayer.WebApplication.Entities
+﻿namespace EntityLayer.WebApplication.ViewModels.Team
 {
-    public class Team : BaseEntity
+    public class TeamAddVM
     {
         public string FullName { get; set; } = null!;
         public string Title { get; set; } = null!;
