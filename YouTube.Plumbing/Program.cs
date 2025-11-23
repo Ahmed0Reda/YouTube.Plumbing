@@ -30,10 +30,18 @@ namespace YouTube.Plumbing
             app.UseRouting();
 
             app.UseAuthorization();
+            #pragma warning disable ASP0014
+            app.UseEndpoints(endpoint =>
+            {
+                endpoint.MapAreaControllerRoute(
+                    name: "Admin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
 
-            app.MapControllerRoute(
+                endpoint.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
 
             app.Run();
         }
