@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.Team;
 using EntityLayer.WebApplication.ViewModels.Testimonial;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.UnitOfWork.Abstract;
@@ -45,15 +46,21 @@ namespace ServiceLayer.Services.Concrete
                 ProjectTo<TestimonialUpdateVM>(_mapper.ConfigurationProvider).SingleAsync();
             return TestimonialEntity;
         }
-        public async Task UpdateTestimonialAsync(TestimonialUpdateVM model) 
+        //public async Task UpdateTestimonialAsync(TestimonialUpdateVM model) 
+        //{
+        //    var TestimonialEntity = await _uniteOfWork.GetGenericRepository<Testimonial>().GetEntityByIdAsync(model.Id);
+        //    if (TestimonialEntity != null)
+        //    {
+        //        _mapper.Map(model, TestimonialEntity);
+        //        _uniteOfWork.GetGenericRepository<Testimonial>().UpdateEntity(TestimonialEntity);
+        //        await _uniteOfWork.CommitAsync();
+        //    }
+        //}
+        public async Task UpdateTestimonialAsync(TestimonialUpdateVM model)
         {
-            var TestimonialEntity = await _uniteOfWork.GetGenericRepository<Testimonial>().GetEntityByIdAsync(model.Id);
-            if (TestimonialEntity != null)
-            {
-                _mapper.Map(model, TestimonialEntity);
-                _uniteOfWork.GetGenericRepository<Testimonial>().UpdateEntity(TestimonialEntity);
-                await _uniteOfWork.CommitAsync();
-            }
+            var about = _mapper.Map<Testimonial>(model);
+            _uniteOfWork.GetGenericRepository<Testimonial>().UpdateEntity(about);
+            await _uniteOfWork.CommitAsync();
         }
     }
 }

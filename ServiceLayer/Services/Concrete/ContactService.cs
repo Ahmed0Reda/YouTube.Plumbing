@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.CategoryVM;
 using EntityLayer.WebApplication.ViewModels.Contact;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.UnitOfWork.Abstract;
@@ -45,15 +46,21 @@ namespace ServiceLayer.Services.Concrete
                 ProjectTo<ContactUpdateVM>(_mapper.ConfigurationProvider).SingleAsync();
             return ContactEntity;
         }
+        //public async Task UpdateContactAsync(ContactUpdateVM model)
+        //{
+        //    var ContactEntity = await _uniteOfWork.GetGenericRepository<ContactUsPage>().GetEntityByIdAsync(model.Id);
+        //    if (ContactEntity != null)
+        //    {
+        //        _mapper.Map(model, ContactEntity);
+        //        _uniteOfWork.GetGenericRepository<ContactUsPage>().UpdateEntity(ContactEntity);
+        //        await _uniteOfWork.CommitAsync();
+        //    }
+        //}
         public async Task UpdateContactAsync(ContactUpdateVM model)
         {
-            var ContactEntity = await _uniteOfWork.GetGenericRepository<ContactUsPage>().GetEntityByIdAsync(model.Id);
-            if (ContactEntity != null)
-            {
-                _mapper.Map(model, ContactEntity);
-                _uniteOfWork.GetGenericRepository<ContactUsPage>().UpdateEntity(ContactEntity);
-                await _uniteOfWork.CommitAsync();
-            }
+            var about = _mapper.Map<ContactUsPage>(model);
+            _uniteOfWork.GetGenericRepository<ContactUsPage>().UpdateEntity(about);
+            await _uniteOfWork.CommitAsync();
         }
     }
 }

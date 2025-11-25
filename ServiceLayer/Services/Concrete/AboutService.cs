@@ -45,22 +45,22 @@ namespace ServiceLayer.Services.Concrete
                 ProjectTo<AboutUpdateVM>(_mapper.ConfigurationProvider).SingleAsync();
             return about;
         }
+        //public async Task UpdateAboutAsync(AboutUpdateVM model)
+        //{
+        //    var aboutEntity = await _uniteOfWork.GetGenericRepository<AboutUsPage>().GetEntityByIdAsync(model.Id);
+        //    if (aboutEntity != null)
+        //    {
+        //        _mapper.Map(model, aboutEntity);
+        //        _uniteOfWork.GetGenericRepository<AboutUsPage>().UpdateEntity(aboutEntity);
+        //        await _uniteOfWork.CommitAsync();
+        //    }
+        //}
         public async Task UpdateAboutAsync(AboutUpdateVM model)
         {
-            var aboutEntity = await _uniteOfWork.GetGenericRepository<AboutUsPage>().GetEntityByIdAsync(model.Id);
-            if (aboutEntity != null)
-            {
-                _mapper.Map(model, aboutEntity);
-                _uniteOfWork.GetGenericRepository<AboutUsPage>().UpdateEntity(aboutEntity);
-                await _uniteOfWork.CommitAsync();
-            }
-        } 
-         //public async Task Update (AboutUpdateVM model)
-        //{
-        //    var about = _mapper.Map<AboutUsPage>(model);
-        //    _uniteOfWork.GetGenericRepository<AboutUsPage>().UpdateEntity(about);
-        //    await _uniteOfWork.CommitAsync();
-        //}
+            var about = _mapper.Map<AboutUsPage>(model);
+            _uniteOfWork.GetGenericRepository<AboutUsPage>().UpdateEntity(about);
+            await _uniteOfWork.CommitAsync();
+        }
 
     }
 }

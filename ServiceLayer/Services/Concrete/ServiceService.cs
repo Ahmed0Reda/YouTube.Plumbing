@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.Portfolio;
 using EntityLayer.WebApplication.ViewModels.Service;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.UnitOfWork.Abstract;
@@ -45,15 +46,21 @@ namespace ServiceLayer.Services.Concrete
                 ProjectTo<ServiceUpdateVM>(_mapper.ConfigurationProvider).SingleAsync();
             return ServiceEntity;
         }
+        //public async Task UpdateServiceAsync(ServiceUpdateVM model)
+        //{
+        //    var ServiceEntity = await _uniteOfWork.GetGenericRepository<Service>().GetEntityByIdAsync(model.Id);
+        //    if (ServiceEntity != null)
+        //    {
+        //        _mapper.Map(model, ServiceEntity);
+        //        _uniteOfWork.GetGenericRepository<Service>().UpdateEntity(ServiceEntity);
+        //        await _uniteOfWork.CommitAsync();
+        //    }
+        //}
         public async Task UpdateServiceAsync(ServiceUpdateVM model)
         {
-            var ServiceEntity = await _uniteOfWork.GetGenericRepository<Service>().GetEntityByIdAsync(model.Id);
-            if (ServiceEntity != null)
-            {
-                _mapper.Map(model, ServiceEntity);
-                _uniteOfWork.GetGenericRepository<Service>().UpdateEntity(ServiceEntity);
-                await _uniteOfWork.CommitAsync();
-            }
+            var about = _mapper.Map<Service>(model);
+            _uniteOfWork.GetGenericRepository<Service>().UpdateEntity(about);
+            await _uniteOfWork.CommitAsync();
         }
     }
 }

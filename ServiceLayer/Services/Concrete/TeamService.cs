@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.SocialMedia;
 using EntityLayer.WebApplication.ViewModels.Team;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.UnitOfWork.Abstract;
@@ -45,15 +46,21 @@ namespace ServiceLayer.Services.Concrete
                 ProjectTo<TeamUpdateVM>(_mapper.ConfigurationProvider).SingleAsync();
             return TeamEntity;
         }
+        //public async Task UpdateTeamAsync(TeamUpdateVM model)
+        //{
+        //    var TeamEntity = await _uniteOfWork.GetGenericRepository<Team>().GetEntityByIdAsync(model.Id);
+        //    if (TeamEntity != null)
+        //    {
+        //        _mapper.Map(model, TeamEntity);
+        //        _uniteOfWork.GetGenericRepository<Team>().UpdateEntity(TeamEntity);
+        //        await _uniteOfWork.CommitAsync();
+        //    }
+        //}
         public async Task UpdateTeamAsync(TeamUpdateVM model)
         {
-            var TeamEntity = await _uniteOfWork.GetGenericRepository<Team>().GetEntityByIdAsync(model.Id);
-            if (TeamEntity != null)
-            {
-                _mapper.Map(model, TeamEntity);
-                _uniteOfWork.GetGenericRepository<Team>().UpdateEntity(TeamEntity);
-                await _uniteOfWork.CommitAsync();
-            }
+            var about = _mapper.Map<Team>(model);
+            _uniteOfWork.GetGenericRepository<Team>().UpdateEntity(about);
+            await _uniteOfWork.CommitAsync();
         }
     }
 }
