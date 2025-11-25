@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.Contact;
 using EntityLayer.WebApplication.ViewModels.HomePage;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.UnitOfWork.Abstract;
@@ -45,15 +46,21 @@ namespace ServiceLayer.Services.Concrete
                 ProjectTo<HomePageUpdateVM>(_mapper.ConfigurationProvider).SingleAsync();
             return HomeEntity;
         }
+        //public async Task UpdateHomeAsync(HomePageUpdateVM model)
+        //{
+        //    var HomeEntity = await _uniteOfWork.GetGenericRepository<HomePage>().GetEntityByIdAsync(model.Id);
+        //    if (HomeEntity != null)
+        //    {
+        //        _mapper.Map(model, HomeEntity);
+        //        _uniteOfWork.GetGenericRepository<HomePage>().UpdateEntity(HomeEntity);
+        //        await _uniteOfWork.CommitAsync();
+        //    }
+        //}
         public async Task UpdateHomeAsync(HomePageUpdateVM model)
         {
-            var HomeEntity = await _uniteOfWork.GetGenericRepository<HomePage>().GetEntityByIdAsync(model.Id);
-            if (HomeEntity != null)
-            {
-                _mapper.Map(model, HomeEntity);
-                _uniteOfWork.GetGenericRepository<HomePage>().UpdateEntity(HomeEntity);
-                await _uniteOfWork.CommitAsync();
-            }
+            var about = _mapper.Map<HomePage>(model);
+            _uniteOfWork.GetGenericRepository<HomePage>().UpdateEntity(about);
+            await _uniteOfWork.CommitAsync();
         }
     }
 }

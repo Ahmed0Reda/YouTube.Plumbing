@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.HomePage;
 using EntityLayer.WebApplication.ViewModels.Portfolio;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.UnitOfWork.Abstract;
@@ -45,15 +46,21 @@ namespace ServiceLayer.Services.Concrete
                 ProjectTo<PortfolioUpdateVM>(_mapper.ConfigurationProvider).SingleAsync();
             return PortfolioEntity;
         }
+        //public async Task UpdatePortfolioAsync(PortfolioUpdateVM model)
+        //{
+        //    var PortfolioEntity = await _uniteOfWork.GetGenericRepository<Portfolio>().GetEntityByIdAsync(model.Id);
+        //    if (PortfolioEntity != null)
+        //    {
+        //        _mapper.Map(model, PortfolioEntity);
+        //        _uniteOfWork.GetGenericRepository<Portfolio>().UpdateEntity(PortfolioEntity);
+        //        await _uniteOfWork.CommitAsync();
+        //    }
+        //}
         public async Task UpdatePortfolioAsync(PortfolioUpdateVM model)
         {
-            var PortfolioEntity = await _uniteOfWork.GetGenericRepository<Portfolio>().GetEntityByIdAsync(model.Id);
-            if (PortfolioEntity != null)
-            {
-                _mapper.Map(model, PortfolioEntity);
-                _uniteOfWork.GetGenericRepository<Portfolio>().UpdateEntity(PortfolioEntity);
-                await _uniteOfWork.CommitAsync();
-            }
+            var about = _mapper.Map<Portfolio>(model);
+            _uniteOfWork.GetGenericRepository<Portfolio>().UpdateEntity(about);
+            await _uniteOfWork.CommitAsync();
         }
     }
 }

@@ -45,15 +45,21 @@ namespace ServiceLayer.Services.Concrete
                 ProjectTo<CategoryUpdateVM>(_mapper.ConfigurationProvider).SingleAsync();
             return CategoryEntity;
         }
+        //public async Task UpdateCategoryAsync(CategoryUpdateVM model)
+        //{
+        //    var CategoryEntity = await _uniteOfWork.GetGenericRepository<Category>().GetEntityByIdAsync(model.Id);
+        //    if (CategoryEntity != null)
+        //    {
+        //        _mapper.Map(model, CategoryEntity);
+        //        _uniteOfWork.GetGenericRepository<Category>().UpdateEntity(CategoryEntity);
+        //        await _uniteOfWork.CommitAsync();
+        //    }
+        //}
         public async Task UpdateCategoryAsync(CategoryUpdateVM model)
         {
-            var CategoryEntity = await _uniteOfWork.GetGenericRepository<Category>().GetEntityByIdAsync(model.Id);
-            if (CategoryEntity != null)
-            {
-                _mapper.Map(model, CategoryEntity);
-                _uniteOfWork.GetGenericRepository<Category>().UpdateEntity(CategoryEntity);
-                await _uniteOfWork.CommitAsync();
-            }
+            var about = _mapper.Map<Category>(model);
+            _uniteOfWork.GetGenericRepository<Category>().UpdateEntity(about);
+            await _uniteOfWork.CommitAsync();
         }
 
     }

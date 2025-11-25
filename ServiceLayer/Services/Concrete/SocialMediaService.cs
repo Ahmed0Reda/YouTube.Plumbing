@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.Service;
 using EntityLayer.WebApplication.ViewModels.SocialMedia;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.UnitOfWork.Abstract;
@@ -45,15 +46,21 @@ namespace ServiceLayer.Services.Concrete
                 ProjectTo<SocialMediaUpdateVM>(_mapper.ConfigurationProvider).SingleAsync();
             return SocialEntity;
         }
+        //public async Task UpdateSocialAsync(SocialMediaUpdateVM model)
+        //{
+        //    var SocialEntity = await _uniteOfWork.GetGenericRepository<SocialMedia>().GetEntityByIdAsync(model.Id);
+        //    if (SocialEntity != null)
+        //    {
+        //        _mapper.Map(model, SocialEntity);
+        //        _uniteOfWork.GetGenericRepository<SocialMedia>().UpdateEntity(SocialEntity);
+        //        await _uniteOfWork.CommitAsync();
+        //    }
+        //}
         public async Task UpdateSocialAsync(SocialMediaUpdateVM model)
         {
-            var SocialEntity = await _uniteOfWork.GetGenericRepository<SocialMedia>().GetEntityByIdAsync(model.Id);
-            if (SocialEntity != null)
-            {
-                _mapper.Map(model, SocialEntity);
-                _uniteOfWork.GetGenericRepository<SocialMedia>().UpdateEntity(SocialEntity);
-                await _uniteOfWork.CommitAsync();
-            }
+            var about = _mapper.Map<SocialMedia>(model);
+            _uniteOfWork.GetGenericRepository<SocialMedia>().UpdateEntity(about);
+            await _uniteOfWork.CommitAsync();
         }
 
     }
