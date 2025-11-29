@@ -7,6 +7,7 @@ namespace ServiceLayer.Extensions
     {
         public static IServiceCollection LoadServiceLayerExtensions(this IServiceCollection services)
         {
+            //services.LoadIdentityExtension();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             
             var types = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.IsClass && !x.IsAbstract && x.Name.EndsWith("Service"));

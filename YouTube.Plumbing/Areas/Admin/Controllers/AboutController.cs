@@ -4,6 +4,7 @@ using ServiceLayer.Services.Abstract;
 
 namespace YouTube.Plumbing.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class AboutController : Controller
     {
         private readonly IAboutService _aboutService;
@@ -27,7 +28,7 @@ namespace YouTube.Plumbing.Areas.Admin.Controllers
         public async Task<IActionResult> AddAbout(AboutAddVM model)
         {
             await _aboutService.AddAboutAsync(model);
-            return RedirectToAction("GetAllListAsync", "AboutController", new { Area = ("Admin") });
+            return RedirectToAction("GetAboutList", "About", new { Area = ("Admin") });
         }
 
         public async Task<IActionResult> UpdateAbout(int id)
@@ -39,13 +40,13 @@ namespace YouTube.Plumbing.Areas.Admin.Controllers
         public async Task<IActionResult> UpdateAbout(AboutUpdateVM model)
         {
             await _aboutService.UpdateAboutAsync(model);
-            return RedirectToAction("GetAllListAsync", "AboutController", new { Area = ("Admin") });
+            return RedirectToAction("GetAboutList", "About", new { Area = ("Admin") });
         }
 
         public async Task<IActionResult> DeleteAbout(int id)
         {
             await _aboutService.DeleteAboutAsync(id);
-            return RedirectToAction("GetAllListAsync", "AboutController", new { Area = ("Admin") });
+            return RedirectToAction("GetAboutList", "About", new { Area = ("Admin") });
         }
     }
 }
